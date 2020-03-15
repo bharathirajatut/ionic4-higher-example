@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            Messages
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-button (click)="getCartList()">Refresh</ion-button>
+
+    <ion-item>
+        <ion-label position="stacked">Product Name</ion-label>
+        <ion-input [(ngModel)]="product_name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="stacked">Price</ion-label>
+        <ion-input [(ngModel)]="price"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="stacked">Qty</ion-label>
+        <ion-input [(ngModel)]="qty"></ion-input>
+    </ion-item>
+    <div style="color:red" *ngIf="error_msg.length!=0">
+        {{error_msg}}
+    </div>
+    <div>
+        <ion-button (click)="add_update()">{{btn}}</ion-button>
+        <ion-button (click)="reset()">Reset</ion-button>
+    </div>
+
+    <ion-list *ngIf="product_list.length!=0">
+        <ion-list-header>
+            Your Products
+        </ion-list-header>
+
+        <ion-item *ngFor="let x of product_list;let index=index">
+
+            <ion-label>
+                <h2>{{x.product_name}}</h2>
+                <p>INR {{x.price}}</p>
+                <p>Qty: {{x.qty}}</p>
+            </ion-label>
+
+            <ion-button (click)="edit(x,index)">
+                <ion-icon slot="icon-only" name="checkmark-circle"></ion-icon>
+            </ion-button>
+
+            <ion-button (click)="delete(index)" fill="outline" color="grey">
+                <ion-icon color="danger" slot="icon-only" name="close-circle"></ion-icon>
+            </ion-button>
+        </ion-item>
+
+    </ion-list>
+</ion-content>
